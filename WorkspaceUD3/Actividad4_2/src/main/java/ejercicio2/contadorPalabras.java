@@ -9,6 +9,9 @@ package ejercicio2;
  * @author pablo
  */
 public class contadorPalabras extends javax.swing.JFrame {
+    
+    private String[] contenido;
+    private String cadenaAux;
 
     /**
      * Creates new form contadorPalabras
@@ -31,12 +34,12 @@ public class contadorPalabras extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         characterRadioButton = new javax.swing.JRadioButton();
         wordRadioButton = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        cleanButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        calculateButton = new javax.swing.JButton();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -60,7 +63,12 @@ public class contadorPalabras extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Borrar");
+        cleanButton.setText("Borrar");
+        cleanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cleanButtonActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -70,7 +78,12 @@ public class contadorPalabras extends javax.swing.JFrame {
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
 
-        jButton2.setText("Calcular");
+        calculateButton.setText("Calcular");
+        calculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,7 +96,7 @@ public class contadorPalabras extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(calculateButton))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -91,7 +104,7 @@ public class contadorPalabras extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(wordRadioButton)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton1))))
+                            .addComponent(cleanButton))))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,13 +116,13 @@ public class contadorPalabras extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(characterRadioButton)
                     .addComponent(wordRadioButton)
-                    .addComponent(jButton1))
+                    .addComponent(cleanButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(calculateButton))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -131,6 +144,27 @@ public class contadorPalabras extends javax.swing.JFrame {
             characterRadioButton.setSelected(false);
         }
     }//GEN-LAST:event_wordRadioButtonActionPerformed
+
+    private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
+        // TODO add your handling code here:
+        if (wordRadioButton.isSelected()){
+            contenido = jTextArea1.getText().split(" ");
+            jTextArea3.setText("Palabras: " + contenido.length);
+        }
+        if (characterRadioButton.isSelected()){
+            cadenaAux = jTextArea1.getText().replaceAll(" ", "");
+            contenido = cadenaAux.split("");
+            jTextArea3.setText("Caracteres: " + contenido.length);
+        }
+    }//GEN-LAST:event_calculateButtonActionPerformed
+
+    private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
+        // TODO add your handling code here:
+        jTextArea1.setText(null);
+        jTextArea3.setText(null);
+        wordRadioButton.setSelected(false);
+        characterRadioButton.setSelected(false);
+    }//GEN-LAST:event_cleanButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,9 +202,9 @@ public class contadorPalabras extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton calculateButton;
     private javax.swing.JRadioButton characterRadioButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cleanButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
