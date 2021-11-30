@@ -4,6 +4,8 @@
  */
 package ejercicio3;
 
+import java.awt.Color;
+
 /**
  *
  * @author pablo
@@ -12,6 +14,7 @@ public class calculadoraIMC extends javax.swing.JFrame {
     
     private double weight;
     private double height;
+    private double IMC;
 
     /**
      * Creates new form calculadoraIMC
@@ -35,16 +38,18 @@ public class calculadoraIMC extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         heightField = new javax.swing.JTextField();
         calculateButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         result = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         title.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         title.setText("Calculadora IMC");
 
         jLabel1.setText("Peso (kg)");
 
-        jLabel2.setText("Estatura (cm)");
+        jLabel2.setText("Estatura (m)");
         jLabel2.setToolTipText("");
 
         calculateButton.setText("Calcular");
@@ -54,34 +59,44 @@ public class calculadoraIMC extends javax.swing.JFrame {
             }
         });
 
+        result.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         result.setText("0");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(result)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 8, Short.MAX_VALUE)
+                .addComponent(result))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(103, 103, 103)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
                         .addComponent(title)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(weightField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(calculateButton)
-                            .addComponent(jLabel2))
+                        .addComponent(calculateButton)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(result)))
-                        .addGap(58, 58, 58)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                            .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(weightField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,16 +106,16 @@ public class calculadoraIMC extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(weightField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(weightField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(heightField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(calculateButton)
-                    .addComponent(result))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,8 +125,20 @@ public class calculadoraIMC extends javax.swing.JFrame {
         // TODO add your handling code here:
         weight = Double.parseDouble(weightField.getText());
         height = Double.parseDouble(heightField.getText());
+        IMC = Math.round(weight/(height*height)*100)/100.0;
         
-        result.setText(String.valueOf((weight/height)));
+        result.setText(String.valueOf(IMC));
+        jPanel1.setBackground(Color.black);
+
+        if (IMC < 18.5 || IMC >= 30){
+            result.setForeground(Color.red);
+        }
+        else if (IMC < 24.9){
+            result.setForeground(Color.green);
+        }
+        else{
+            result.setForeground(Color.orange);
+        }
     }//GEN-LAST:event_calculateButtonActionPerformed
 
     /**
@@ -154,6 +181,7 @@ public class calculadoraIMC extends javax.swing.JFrame {
     private javax.swing.JTextField heightField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel result;
     private javax.swing.JLabel title;
     private javax.swing.JTextField weightField;
