@@ -4,6 +4,8 @@
  */
 package ejercicio5;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author pablo
@@ -13,6 +15,9 @@ public class blackjackGame extends javax.swing.JFrame {
     private String player1 = null;
     private String player2 = null;
     private String gameTitle = null;
+    private boolean player1Turn = true;
+    private boolean player2Turn = false;
+    private int rand = 0;
 
     /**
      * Creates new form blackjackGame
@@ -47,6 +52,9 @@ public class blackjackGame extends javax.swing.JFrame {
         throwButtonPlayer2 = new javax.swing.JButton();
         endPlayer1TurnButton = new javax.swing.JButton();
         endPlayer2TurnButton = new javax.swing.JButton();
+        scorePlayer1 = new javax.swing.JLabel();
+        scorePlayer2 = new javax.swing.JLabel();
+        resultImage = new javax.swing.JLabel();
         blackjackTitle = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
         playButton = new javax.swing.JButton();
@@ -121,6 +129,7 @@ public class blackjackGame extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
+        gameWindow.setBackground(new java.awt.Color(255, 255, 255));
         gameWindow.setSize(new java.awt.Dimension(400, 500));
 
         vsLabel.setFont(new java.awt.Font("Academy Engraved LET", 3, 24)); // NOI18N
@@ -133,6 +142,11 @@ public class blackjackGame extends javax.swing.JFrame {
         player2LabelGame.setText("player2");
 
         throwButtonPlayer1.setLabel("Tirar");
+        throwButtonPlayer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                throwButtonPlayer1ActionPerformed(evt);
+            }
+        });
 
         throwButtonPlayer2.setLabel("Tirar");
 
@@ -145,6 +159,10 @@ public class blackjackGame extends javax.swing.JFrame {
 
         endPlayer2TurnButton.setText("Terminar");
 
+        scorePlayer1.setText("score1");
+
+        scorePlayer2.setText("score2");
+
         javax.swing.GroupLayout gameWindowLayout = new javax.swing.GroupLayout(gameWindow.getContentPane());
         gameWindow.getContentPane().setLayout(gameWindowLayout);
         gameWindowLayout.setHorizontalGroup(
@@ -154,18 +172,26 @@ public class blackjackGame extends javax.swing.JFrame {
                 .addGroup(gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(gameWindowLayout.createSequentialGroup()
                         .addComponent(endPlayer1TurnButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(scorePlayer1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scorePlayer2)
+                        .addGap(18, 18, 18)
                         .addComponent(endPlayer2TurnButton))
                     .addGroup(gameWindowLayout.createSequentialGroup()
                         .addComponent(throwButtonPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(player1LabelGame)
                         .addGap(31, 31, 31)
-                        .addComponent(vsLabel)
-                        .addGap(36, 36, 36)
-                        .addComponent(player2LabelGame)
-                        .addGap(18, 18, 18)
-                        .addComponent(throwButtonPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(resultImage)
+                            .addGroup(gameWindowLayout.createSequentialGroup()
+                                .addComponent(vsLabel)
+                                .addGap(36, 36, 36)
+                                .addComponent(player2LabelGame)
+                                .addGap(18, 18, 18)
+                                .addComponent(throwButtonPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(19, 19, 19)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         gameWindowLayout.setVerticalGroup(
@@ -181,8 +207,12 @@ public class blackjackGame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(endPlayer1TurnButton)
-                    .addComponent(endPlayer2TurnButton))
-                .addContainerGap(213, Short.MAX_VALUE))
+                    .addComponent(endPlayer2TurnButton)
+                    .addComponent(scorePlayer1)
+                    .addComponent(scorePlayer2))
+                .addGap(120, 120, 120)
+                .addComponent(resultImage)
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -261,6 +291,35 @@ public class blackjackGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_endPlayer1TurnButtonActionPerformed
 
+    private void throwButtonPlayer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwButtonPlayer1ActionPerformed
+        // TODO add your handling code here:
+        rand = (int)(Math.random()*6+1);
+        
+        if (player1Turn){
+            switch(rand){
+                case 1:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/1.jpg"));
+                    break;
+                case 2:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/2.jpg"));
+                    break;
+                case 3:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/3.jpg"));
+                    break;
+                case 4:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/4.jpg"));
+                    break;
+                case 5:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/5.jpg"));
+                    break;
+                case 6:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/6.jpg"));
+                    break;
+            }
+            
+        }
+    }//GEN-LAST:event_throwButtonPlayer1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,6 +373,9 @@ public class blackjackGame extends javax.swing.JFrame {
     private javax.swing.JButton registerButton;
     private javax.swing.JDialog registerWindow;
     private javax.swing.JLabel registerWindowTitle;
+    private javax.swing.JLabel resultImage;
+    private javax.swing.JLabel scorePlayer1;
+    private javax.swing.JLabel scorePlayer2;
     private javax.swing.JButton throwButtonPlayer1;
     private javax.swing.JButton throwButtonPlayer2;
     private javax.swing.JLabel vsLabel;

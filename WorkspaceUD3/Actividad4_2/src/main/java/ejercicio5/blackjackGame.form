@@ -118,6 +118,9 @@
     </Container>
     <Container class="javax.swing.JDialog" name="gameWindow">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 500]"/>
         </Property>
@@ -126,24 +129,34 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="endPlayer1TurnButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="scorePlayer1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="scorePlayer2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="endPlayer2TurnButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="throwButtonPlayer1" min="-2" pref="60" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="player1LabelGame" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="vsLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="player2LabelGame" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="throwButtonPlayer2" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="resultImage" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="vsLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  <Component id="player2LabelGame" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="throwButtonPlayer2" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="29" max="32767" attributes="0"/>
@@ -165,8 +178,12 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="endPlayer1TurnButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="endPlayer2TurnButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="scorePlayer1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="scorePlayer2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="213" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="resultImage" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="205" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -200,6 +217,9 @@
           <Properties>
             <Property name="label" type="java.lang.String" value="Tirar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="throwButtonPlayer1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="throwButtonPlayer2">
           <Properties>
@@ -218,6 +238,18 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Terminar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="scorePlayer1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="score1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="scorePlayer2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="score2"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="resultImage">
         </Component>
       </SubComponents>
     </Container>
