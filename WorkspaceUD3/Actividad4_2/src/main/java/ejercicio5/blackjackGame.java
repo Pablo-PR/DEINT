@@ -16,7 +16,8 @@ public class blackjackGame extends javax.swing.JFrame {
     private String player2 = null;
     private String gameTitle = null;
     private boolean player1Turn = true;
-    private boolean player2Turn = false;
+    private int intScorePlayer1 = 0;
+    private int intScorePlayer2 = 0;
     private int rand = 0;
 
     /**
@@ -55,6 +56,9 @@ public class blackjackGame extends javax.swing.JFrame {
         scorePlayer1 = new javax.swing.JLabel();
         scorePlayer2 = new javax.swing.JLabel();
         resultImage = new javax.swing.JLabel();
+        victoryWindow = new javax.swing.JDialog();
+        restartGameButton = new javax.swing.JButton();
+        victoryPlayer = new javax.swing.JLabel();
         blackjackTitle = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
         playButton = new javax.swing.JButton();
@@ -149,6 +153,11 @@ public class blackjackGame extends javax.swing.JFrame {
         });
 
         throwButtonPlayer2.setLabel("Tirar");
+        throwButtonPlayer2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                throwButtonPlayer2ActionPerformed(evt);
+            }
+        });
 
         endPlayer1TurnButton.setText("Terminar");
         endPlayer1TurnButton.addActionListener(new java.awt.event.ActionListener() {
@@ -158,40 +167,43 @@ public class blackjackGame extends javax.swing.JFrame {
         });
 
         endPlayer2TurnButton.setText("Terminar");
-
-        scorePlayer1.setText("score1");
-
-        scorePlayer2.setText("score2");
+        endPlayer2TurnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endPlayer2TurnButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout gameWindowLayout = new javax.swing.GroupLayout(gameWindow.getContentPane());
         gameWindow.getContentPane().setLayout(gameWindowLayout);
         gameWindowLayout.setHorizontalGroup(
             gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gameWindowLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(gameWindowLayout.createSequentialGroup()
-                        .addComponent(endPlayer1TurnButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(scorePlayer1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(scorePlayer2)
-                        .addGap(18, 18, 18)
-                        .addComponent(endPlayer2TurnButton))
-                    .addGroup(gameWindowLayout.createSequentialGroup()
-                        .addComponent(throwButtonPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(player1LabelGame)
-                        .addGap(31, 31, 31)
-                        .addGroup(gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultImage)
+                        .addGap(23, 23, 23)
+                        .addGroup(gameWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(gameWindowLayout.createSequentialGroup()
+                                .addComponent(endPlayer1TurnButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(scorePlayer1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(scorePlayer2)
+                                .addGap(18, 18, 18)
+                                .addComponent(endPlayer2TurnButton))
+                            .addGroup(gameWindowLayout.createSequentialGroup()
+                                .addComponent(throwButtonPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(player1LabelGame)
+                                .addGap(31, 31, 31)
                                 .addComponent(vsLabel)
                                 .addGap(36, 36, 36)
                                 .addComponent(player2LabelGame)
                                 .addGap(18, 18, 18)
-                                .addComponent(throwButtonPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19)))
+                                .addComponent(throwButtonPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19))))
+                    .addGroup(gameWindowLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(resultImage)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         gameWindowLayout.setVerticalGroup(
@@ -210,9 +222,44 @@ public class blackjackGame extends javax.swing.JFrame {
                     .addComponent(endPlayer2TurnButton)
                     .addComponent(scorePlayer1)
                     .addComponent(scorePlayer2))
-                .addGap(120, 120, 120)
+                .addGap(130, 130, 130)
                 .addComponent(resultImage)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+
+        victoryWindow.setSize(new java.awt.Dimension(400, 300));
+
+        restartGameButton.setText("Reiniciar juego");
+        restartGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restartGameButtonActionPerformed(evt);
+            }
+        });
+
+        victoryPlayer.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        victoryPlayer.setText("pp");
+
+        javax.swing.GroupLayout victoryWindowLayout = new javax.swing.GroupLayout(victoryWindow.getContentPane());
+        victoryWindow.getContentPane().setLayout(victoryWindowLayout);
+        victoryWindowLayout.setHorizontalGroup(
+            victoryWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, victoryWindowLayout.createSequentialGroup()
+                .addGap(0, 148, Short.MAX_VALUE)
+                .addComponent(restartGameButton)
+                .addGap(137, 137, 137))
+            .addGroup(victoryWindowLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(victoryPlayer)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        victoryWindowLayout.setVerticalGroup(
+            victoryWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(victoryWindowLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(victoryPlayer)
+                .addGap(81, 81, 81)
+                .addComponent(restartGameButton)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -289,6 +336,13 @@ public class blackjackGame extends javax.swing.JFrame {
 
     private void endPlayer1TurnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endPlayer1TurnButtonActionPerformed
         // TODO add your handling code here:
+        player1Turn = false;
+        
+        if (intScorePlayer1 > 21){
+            gameWindow.setVisible(false);
+            victoryWindow.setVisible(true);
+            victoryPlayer.setText("El ganador es " + player2);
+        }
     }//GEN-LAST:event_endPlayer1TurnButtonActionPerformed
 
     private void throwButtonPlayer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwButtonPlayer1ActionPerformed
@@ -299,26 +353,97 @@ public class blackjackGame extends javax.swing.JFrame {
             switch(rand){
                 case 1:
                     resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/1.jpg"));
+                    intScorePlayer1 += 1;
                     break;
                 case 2:
                     resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/2.jpg"));
+                    intScorePlayer1 += 2;
                     break;
                 case 3:
                     resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/3.jpg"));
+                    intScorePlayer1 += 3;
                     break;
                 case 4:
                     resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/4.jpg"));
+                    intScorePlayer1 += 4;
                     break;
                 case 5:
                     resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/5.jpg"));
+                    intScorePlayer1 += 5;
                     break;
                 case 6:
                     resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/6.jpg"));
+                    intScorePlayer1 += 6;
                     break;
             }
             
+            scorePlayer1.setText(String.valueOf(intScorePlayer1));
         }
     }//GEN-LAST:event_throwButtonPlayer1ActionPerformed
+
+    private void throwButtonPlayer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwButtonPlayer2ActionPerformed
+        // TODO add your handling code here:
+        rand = (int)(Math.random()*6+1);
+        
+        if (!player1Turn){
+            switch(rand){
+                case 1:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/1.jpg"));
+                    intScorePlayer2 += 1;
+                    break;
+                case 2:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/2.jpg"));
+                    intScorePlayer2 += 2;
+                    break;
+                case 3:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/3.jpg"));
+                    intScorePlayer2 += 3;
+                    break;
+                case 4:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/4.jpg"));
+                    intScorePlayer2 += 4;
+                    break;
+                case 5:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/5.jpg"));
+                    intScorePlayer2 += 5;
+                    break;
+                case 6:
+                    resultImage.setIcon(new ImageIcon("/Users/pablo/2DAM/DEINT/WorkspaceUD3/Actividad4_2/src/main/java/ejercicio5/images/6.jpg"));
+                    intScorePlayer2 += 6;
+                    break;
+            }
+            
+            scorePlayer2.setText(String.valueOf(intScorePlayer2));
+        }
+    }//GEN-LAST:event_throwButtonPlayer2ActionPerformed
+
+    private void endPlayer2TurnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endPlayer2TurnButtonActionPerformed
+        // TODO add your handling code here:
+        gameWindow.setVisible(false);
+        victoryWindow.setVisible(true);
+        
+        if (intScorePlayer1 == intScorePlayer2){
+            victoryPlayer.setText("Habeis empatado");
+        }
+        else if (intScorePlayer2 > intScorePlayer1 && intScorePlayer2 < 22){
+            victoryPlayer.setText("El ganador es " + player2);
+        }
+        else{
+            victoryPlayer.setText("El ganador es " + player1);
+        }
+    }//GEN-LAST:event_endPlayer2TurnButtonActionPerformed
+
+    private void restartGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartGameButtonActionPerformed
+        // TODO add your handling code here:
+        intScorePlayer1 = 0;
+        intScorePlayer2 = 0;
+        scorePlayer1.setText("");
+        scorePlayer2.setText("");
+        victoryPlayer.setText("");
+        player1Turn = true;
+        victoryWindow.setVisible(false);
+        gameWindow.setVisible(true);
+    }//GEN-LAST:event_restartGameButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,11 +498,14 @@ public class blackjackGame extends javax.swing.JFrame {
     private javax.swing.JButton registerButton;
     private javax.swing.JDialog registerWindow;
     private javax.swing.JLabel registerWindowTitle;
+    private javax.swing.JButton restartGameButton;
     private javax.swing.JLabel resultImage;
     private javax.swing.JLabel scorePlayer1;
     private javax.swing.JLabel scorePlayer2;
     private javax.swing.JButton throwButtonPlayer1;
     private javax.swing.JButton throwButtonPlayer2;
+    private javax.swing.JLabel victoryPlayer;
+    private javax.swing.JDialog victoryWindow;
     private javax.swing.JLabel vsLabel;
     // End of variables declaration//GEN-END:variables
 }
